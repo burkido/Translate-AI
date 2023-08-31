@@ -15,7 +15,6 @@ enum class Language(
     FRENCH("fr", "French"),
     GERMAN("de", "German"),
     GREEK("el", "Greek"),
-    HEBREW("he", "Hebrew"),
     HINDI("hi", "Hindi"),
     HUNGARIAN("hu", "Hungarian"),
     INDONESIAN("id", "Indonesian"),
