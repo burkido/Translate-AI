@@ -42,6 +42,8 @@ dependencies {
     implementation(Deps.composeFoundation)
     implementation(Deps.composeMaterial)
     implementation(Deps.activityCompose)
+    implementation(Deps.composeNavigation)
+    implementation(Deps.coilCompose)
 
     implementation(Deps.hiltAndroid)
     kapt(Deps.hiltAndroidCompiler)
