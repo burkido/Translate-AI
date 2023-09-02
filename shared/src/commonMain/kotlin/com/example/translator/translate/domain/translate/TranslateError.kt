@@ -9,4 +9,4 @@ enum class TranslateError {
     INVALID_TARGET_LANGUAGE,
 }
 
-class TranslateException(private val error: TranslateError): Exception("An error occurred while translating: $error")
+class TranslateException(val error: TranslateError): Exception("An error occurred while translating: $error")
