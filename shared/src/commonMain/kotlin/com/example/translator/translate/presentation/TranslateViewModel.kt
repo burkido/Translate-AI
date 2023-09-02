@@ -72,7 +72,7 @@ class TranslateViewModel(
             }
             is TranslateEvent.ChooseToLanguage -> {
                 val newState = _state.updateAndGet { it.copy(
-                    isChoosingFromLanguage = false,
+                    isChoosingToLanguage = false,
                     toLanguage = event.language
                 ) }
                 translate(newState)
