@@ -3,4 +3,8 @@
     <string name="close">Close</string>
     <string name="open">Open</string>
     <string name="swap_languages">Swap languages</string>
+    <string name="translate_hint">Enter a text to translate</string>
+    <string name="translate">Translate</string>
+    <string name="copy">Copy</string>
+    <string name="copied">Text copied to clipboard</string>
 </resources>
