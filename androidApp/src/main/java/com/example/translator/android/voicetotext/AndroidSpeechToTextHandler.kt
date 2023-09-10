@@ -1,0 +1,104 @@
+package com.example.translator.android.voicetotext
+
+import android.app.Application
+import android.content.Intent
+import android.os.Bundle
+import android.speech.RecognitionListener
+import android.speech.RecognizerIntent
+import android.speech.SpeechRecognizer
+import com.example.translator.android.R
+import com.example.translator.core.domain.util.CommonStateFlow
+import com.example.translator.core.domain.util.asCommonStateFlow
+import com.example.translator.voicetotext.domain.VoiceToTextHandler
+import com.example.translator.voicetotext.domain.VoiceToTextState
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
+
+class AndroidSpeechToTextHandler(
+    private val app: Application
+) : VoiceToTextHandler, RecognitionListener {
+
+    private val recognizer = SpeechRecognizer.createSpeechRecognizer(app)
+
+    private val _state = MutableStateFlow(VoiceToTextState())
+    override val state: CommonStateFlow<VoiceToTextState>
+        get() = _state.asCommonStateFlow()
+
+    override fun startListening(langCode: String) {
+        _state.update { VoiceToTextState() }
+
+        if (!SpeechRecognizer.isRecognitionAvailable(app)) {
+            _state.update {
+                it.copy(
+                    error = app.getString(R.string.speech_recognition_not_available)
+                )
+            }
+            return
+        }
+
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            )
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, langCode)
+        }
+        recognizer.setRecognitionListener(this)
+        recognizer.startListening(intent)
+
+        _state.update { it.copy(isSpeaking = true) }
+    }
+
+    override fun stopListening() {
+        _state.update { it.copy(isSpeaking = false) }
+        recognizer.stopListening()
+    }
+
+    override fun cancelListening() {
+        recognizer.cancel()
+    }
+
+    override fun reset() {
+        _state.update { VoiceToTextState() }
+    }
+
+    override fun onReadyForSpeech(p0: Bundle?) {
+        _state.update { it.copy(error = null) }
+    }
+
+    override fun onBeginningOfSpeech() = Unit
+
+    override fun onRmsChanged(rms: Float) {
+        _state.update {
+            it.copy(
+                ratio = rms * (1f / (12f - (-2f)))
+            )
+        }
+    }
+
+    override fun onBufferReceived(p0: ByteArray?) = Unit
+
+    override fun onEndOfSpeech() {
+        _state.update { it.copy(isSpeaking = false) }
+    }
+
+    override fun onError(code: Int) {
+        _state.update { it.copy(error = "An error occurred with code $code") }
+    }
+
+    override fun onResults(result: Bundle?) {
+        result
+            ?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
+            ?.getOrNull(0)
+            ?.let { text ->
+                _state.update { it.copy(
+                    result = text
+                ) }
+            }
+    }
+
+    override fun onPartialResults(p0: Bundle?) = Unit
+
+    override fun onEvent(p0: Int, p1: Bundle?) = Unit
+
+}
