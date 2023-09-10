@@ -9,23 +9,23 @@ import android.speech.SpeechRecognizer
 import com.example.translator.android.R
 import com.example.translator.core.domain.util.CommonStateFlow
 import com.example.translator.core.domain.util.asCommonStateFlow
-import com.example.translator.voicetotext.domain.VoiceToTextHandler
-import com.example.translator.voicetotext.domain.VoiceToTextState
+import com.example.translator.voicetotext.domain.SpeechToTextHandler
+import com.example.translator.voicetotext.domain.SpeechToTextHandlerState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 
 class AndroidSpeechToTextHandler(
     private val app: Application
-) : VoiceToTextHandler, RecognitionListener {
+) : SpeechToTextHandler, RecognitionListener {
 
     private val recognizer = SpeechRecognizer.createSpeechRecognizer(app)
 
-    private val _state = MutableStateFlow(VoiceToTextState())
-    override val state: CommonStateFlow<VoiceToTextState>
+    private val _state = MutableStateFlow(SpeechToTextHandlerState())
+    override val state: CommonStateFlow<SpeechToTextHandlerState>
         get() = _state.asCommonStateFlow()
 
     override fun startListening(langCode: String) {
-        _state.update { VoiceToTextState() }
+        _state.update { SpeechToTextHandlerState() }
 
         if (!SpeechRecognizer.isRecognitionAvailable(app)) {
             _state.update {
@@ -59,7 +59,7 @@ class AndroidSpeechToTextHandler(
     }
 
     override fun reset() {
-        _state.update { VoiceToTextState() }
+        _state.update { SpeechToTextHandlerState() }
     }
 
     override fun onReadyForSpeech(p0: Bundle?) {

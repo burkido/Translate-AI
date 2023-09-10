@@ -2,7 +2,7 @@ package com.example.translator.android.voicetotext.di
 
 import android.app.Application
 import com.example.translator.android.voicetotext.data.AndroidSpeechToTextHandler
-import com.example.translator.voicetotext.domain.VoiceToTextHandler
+import com.example.translator.voicetotext.domain.SpeechToTextHandler
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,7 +17,7 @@ object VoiceToTextModule {
     @ViewModelScoped
     fun provideVoiceToTextHandler(
          app: Application
-    ): VoiceToTextHandler {
+    ): SpeechToTextHandler {
         return AndroidSpeechToTextHandler(app = app)
     }
 }
