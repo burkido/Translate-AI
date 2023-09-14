@@ -168,7 +168,7 @@ fun SpeechToTextScreen(
                     when (displayState) {
                         DisplayState.IDLE -> {
                             Text(
-                                text = "Start talking",
+                                text = "Click record to start talking",
                                 style = MaterialTheme.typography.h2,
                                 textAlign = TextAlign.Center
                             )
