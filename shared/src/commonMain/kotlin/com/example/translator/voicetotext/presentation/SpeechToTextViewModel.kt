@@ -41,12 +41,11 @@ class SpeechToTextViewModel(
         viewModelScope.launch {
             while (true) {
                 if (state.value.displayState == DisplayState.SPEAKING) {
-                    speechToTextHandler.reset()
-                }
-                _state.update {
-                    it.copy(
-                        ratio = it.ratio + speechToTextHandler.state.value.ratio
-                    )
+                    _state.update {
+                        it.copy(
+                            ratio = it.ratio + speechToTextHandler.state.value.ratio
+                        )
+                    }
                 }
                 delay(50)
             }
@@ -56,7 +55,7 @@ class SpeechToTextViewModel(
     fun onEvent(event: SpeechToTextEvent) {
         when (event) {
             SpeechToTextEvent.Close -> {
-                _state.update { SpeechToTextState() }
+                Unit
             }
 
             is SpeechToTextEvent.PermissionResult -> {

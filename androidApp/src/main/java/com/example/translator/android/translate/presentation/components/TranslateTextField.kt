@@ -124,7 +124,8 @@ fun IdleTranslateTextField(
         ProgressButton(
             text = stringResource(id = R.string.translate),
             isLoading = isTranslating,
-            onClick = onTranslateClick
+            onClick = onTranslateClick,
+            modifier = Modifier.align(Alignment.BottomEnd)
         )
     }
 }

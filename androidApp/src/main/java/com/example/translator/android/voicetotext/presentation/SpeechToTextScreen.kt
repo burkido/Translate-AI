@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -45,7 +46,7 @@ import com.example.translator.voicetotext.presentation.SpeechToTextState
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun SpeechToTextEvent(
+fun SpeechToTextScreen(
     state: SpeechToTextState,
     languageCode: String,
     onResult: (String) -> Unit,
@@ -124,7 +125,9 @@ fun SpeechToTextEvent(
                     }
                 }
             }
-        }
+        },
+        floatingActionButtonPosition = FabPosition.Center,
+        isFloatingActionButtonDocked = true
     ) { innerPadding ->
         Column(
             modifier = Modifier

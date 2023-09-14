@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -64,24 +65,21 @@ fun TranslateHistoryItem(
             verticalAlignment = Alignment.CenterVertically
         ) {
             SmallLanguageIcon(language = item.fromLanguage)
-            Spacer(modifier = Modifier.size(16.dp))
+            Spacer(modifier = Modifier.size(8.dp))
             Text(
                 text = item.fromText,
                 style = MaterialTheme.typography.body2
             )
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                SmallLanguageIcon(language = item.toLanguage)
-                Spacer(modifier = Modifier.width(16.dp))
-                Text(
-                    text = item.toText,
-                    color = MaterialTheme.colors.onSurface,
-                    style = MaterialTheme.typography.body1,
-                    fontWeight = FontWeight.Medium
-                )
-            }
+            Spacer(modifier = Modifier.width(16.dp))
+            SmallLanguageIcon(language = item.toLanguage)
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(
+                text = item.toText,
+                color = MaterialTheme.colors.onSurface,
+                style = MaterialTheme.typography.body1,
+                fontWeight = FontWeight.Medium
+            )
+
         }
     }
 }
@@ -121,7 +119,8 @@ fun TranslateScreen(
                     contentDescription = "Record Audio"
                 )
             }
-        }
+        },
+        floatingActionButtonPosition = FabPosition.Center
     ) { paddingValues ->
         LazyColumn(
             modifier = Modifier

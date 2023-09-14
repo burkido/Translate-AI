@@ -50,8 +50,8 @@ class AndroidSpeechToTextHandler(
     }
 
     override fun stopListening() {
-        _state.update { it.copy(isSpeaking = false) }
-        recognizer.stopListening()
+        _state.update { SpeechToTextHandlerState() }
+        recognizer.cancel()
     }
 
     override fun cancelListening() {
