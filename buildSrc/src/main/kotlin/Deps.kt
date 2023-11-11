@@ -10,6 +10,7 @@ object Deps {
     const val composeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview:$composeVersion"
     const val composeFoundation = "androidx.compose.foundation:foundation:$composeVersion"
     const val composeMaterial = "androidx.compose.material:material:$composeVersion"
+    const val composeMaterial3 = "androidx.compose.material3:material3:1.2.0-alpha09"
     const val composeIconsExtended = "androidx.compose.material:material-icons-extended:$composeVersion"
 
     private const val composeNavigationVersion = "2.5.3"

@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "com.example.translator.android"
-    compileSdk = 33
+    compileSdk = 34
     defaultConfig {
         applicationId = "com.example.translator.android"
         minSdk = 24
@@ -40,7 +40,7 @@ dependencies {
     implementation(Deps.composeUiTooling)
     implementation(Deps.composeUiToolingPreview)
     implementation(Deps.composeFoundation)
-    implementation(Deps.composeMaterial)
+    implementation(Deps.composeMaterial3)
     implementation(Deps.activityCompose)
     implementation(Deps.composeNavigation)
     implementation(Deps.coilCompose)
