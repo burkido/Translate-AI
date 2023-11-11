@@ -17,17 +17,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.FabPosition
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Refresh
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -44,7 +44,6 @@ import com.example.translator.voicetotext.presentation.DisplayState
 import com.example.translator.voicetotext.presentation.SpeechToTextEvent
 import com.example.translator.voicetotext.presentation.SpeechToTextState
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun SpeechToTextScreen(
     state: SpeechToTextState,
@@ -81,11 +80,11 @@ fun SpeechToTextScreen(
                             SpeechToTextEvent.ToggleRecording(languageCode)
                         ) else onResult(state.spokenText)
                     },
-                    backgroundColor = MaterialTheme.colors.primary,
-                    contentColor = MaterialTheme.colors.onPrimary,
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary,
                     modifier = Modifier.size(56.dp)
                 ) {
-                    AnimatedContent(targetState = state.displayState) { displayState ->
+                    AnimatedContent(targetState = state.displayState, label = "") { displayState ->
                         when (displayState) {
                             DisplayState.SPEAKING -> {
                                 Icon(
@@ -127,7 +126,6 @@ fun SpeechToTextScreen(
             }
         },
         floatingActionButtonPosition = FabPosition.Center,
-        isFloatingActionButtonDocked = true
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -164,12 +162,12 @@ fun SpeechToTextScreen(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                AnimatedContent(targetState = state.displayState) { displayState ->
+                AnimatedContent(targetState = state.displayState, label = "") { displayState ->
                     when (displayState) {
                         DisplayState.IDLE -> {
                             Text(
                                 text = "Click record to start talking",
-                                style = MaterialTheme.typography.h2,
+                                style = MaterialTheme.typography.titleMedium,
                                 textAlign = TextAlign.Center
                             )
                         }
@@ -186,7 +184,7 @@ fun SpeechToTextScreen(
                         DisplayState.DISPLAYING_RESULT -> {
                             Text(
                                 text = state.spokenText,
-                                style = MaterialTheme.typography.h2,
+                                style = MaterialTheme.typography.titleMedium,
                                 textAlign = TextAlign.Center
                             )
                         }
@@ -194,9 +192,9 @@ fun SpeechToTextScreen(
                         DisplayState.ERROR -> {
                             Text(
                                 text = state.error ?: "Unknown error",
-                                style = MaterialTheme.typography.h2,
+                                style = MaterialTheme.typography.titleMedium,
                                 textAlign = TextAlign.Center,
-                                color = MaterialTheme.colors.error
+                                color = MaterialTheme.colorScheme.error
                             )
                         }
 

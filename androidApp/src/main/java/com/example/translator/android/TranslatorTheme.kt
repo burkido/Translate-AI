@@ -1,29 +1,36 @@
 package com.example.translator.android
 
+import android.app.Activity
+import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Shapes
-import androidx.compose.material.Typography
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Shapes
+import androidx.compose.material3.Typography
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.view.WindowCompat
+import com.example.translator.android.core.theme.DarkColors
+import com.example.translator.android.core.theme.LightColors
 
 @Composable
 fun TranslatorTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
+    // Dynamic color is available on Android 12+
+    dynamicColor: Boolean = true,
+    content: @Composable () -> Unit,
 ) {
-    val colors = if (darkTheme) {
-        com.example.translator.android.core.theme.darkColors
-    } else {
-        com.example.translator.android.core.theme.lightColors
-    }
-
     val SfProText = FontFamily(
         Font(
             resId = R.font.sf_pro_text_regular,
@@ -39,32 +46,96 @@ fun TranslatorTheme(
         ),
     )
 
-    val typography = Typography(
-        h1 = TextStyle(
+    val TranslateAITypography = Typography(
+        displayLarge = TextStyle(
+            fontSize = 16.sp,
+            lineHeight = 20.sp,
             fontFamily = SfProText,
             fontWeight = FontWeight.Bold,
-            fontSize = 30.sp
         ),
-        h2 = TextStyle(
-            fontFamily = SfProText,
-            fontWeight = FontWeight.Bold,
-            fontSize = 24.sp
-        ),
-        h3 = TextStyle(
+        displayMedium = TextStyle(
+            fontSize = 12.sp,
+            lineHeight = 20.sp,
             fontFamily = SfProText,
             fontWeight = FontWeight.Medium,
-            fontSize = 18.sp
         ),
-        body1 = TextStyle(
+        displaySmall = TextStyle(
             fontFamily = SfProText,
             fontWeight = FontWeight.Normal,
-            fontSize = 14.sp
+            fontSize = 36.sp,
+            lineHeight = 44.sp,
+            letterSpacing = 0.sp
         ),
-        body2 = TextStyle(
+        headlineLarge = TextStyle(
             fontFamily = SfProText,
-            fontWeight = FontWeight.Normal,
-            fontSize = 12.sp
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 32.sp,
+            lineHeight = 40.sp,
+            letterSpacing = 0.sp
         ),
+        headlineMedium = TextStyle(
+            fontFamily = SfProText,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 28.sp,
+            lineHeight = 36.sp,
+            letterSpacing = 0.sp
+        ),
+        headlineSmall = TextStyle(
+            fontFamily = SfProText,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 24.sp,
+            lineHeight = 32.sp,
+            letterSpacing = 0.sp
+        ),
+        titleLarge = TextStyle(
+            fontFamily = SfProText,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 32.sp,
+            lineHeight = 28.sp,
+            letterSpacing = 0.sp
+        ),
+        titleMedium = TextStyle(
+            fontFamily = SfProText,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 22.sp,
+            lineHeight = 24.sp,
+            letterSpacing = 0.15.sp
+        ),
+        titleSmall = TextStyle(
+            fontFamily = SfProText,
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp,
+            lineHeight = 24.sp,
+            letterSpacing = 0.15.sp
+        ),
+        bodyMedium = TextStyle(
+            fontFamily = SfProText,
+            fontWeight = FontWeight.Medium,
+            fontSize = 14.sp,
+            lineHeight = 20.sp,
+            letterSpacing = 0.25.sp
+        ),
+        labelLarge = TextStyle(
+            fontFamily = SfProText,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 18.sp,
+            lineHeight = 20.sp,
+            letterSpacing = 0.1.sp
+        ),
+        labelMedium = TextStyle(
+            fontFamily = SfProText,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 16.sp,
+            lineHeight = 16.sp,
+            letterSpacing = 0.5.sp
+        ),
+        labelSmall = TextStyle(
+            fontFamily = SfProText,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 11.sp,
+            lineHeight = 16.sp,
+            letterSpacing = 0.5.sp
+        )
     )
     val shapes = Shapes(
         small = RoundedCornerShape(4.dp),
@@ -72,9 +143,27 @@ fun TranslatorTheme(
         large = RoundedCornerShape(0.dp)
     )
 
+    val colorScheme = when {
+        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+            val context = LocalContext.current
+            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        }
+
+        darkTheme -> DarkColors
+        else -> LightColors
+    }
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        SideEffect {
+            val window = (view.context as Activity).window
+            window.statusBarColor = colorScheme.primaryContainer.toArgb()
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
+        }
+    }
+
     MaterialTheme(
-        colors = colors,
-        typography = typography,
+        colorScheme = colorScheme,
+        typography = TranslateAITypography,
         shapes = shapes,
         content = content
     )

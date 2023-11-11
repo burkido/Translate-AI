@@ -1,7 +1,6 @@
 package com.example.translator.android.translate.presentation.components
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,13 +13,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -41,7 +40,6 @@ import com.example.translator.android.R
 import com.example.translator.android.core.theme.LightBlue
 import com.example.translator.core.presentation.UiLanguage
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun TranslateTextField(
     fromText: String,
@@ -68,7 +66,7 @@ fun TranslateTextField(
             .clickable(onClick = onTextFieldClick)
             .padding(16.dp)
     ) {
-        AnimatedContent(targetState = toText) { toText ->
+        AnimatedContent(targetState = toText, label = "") { toText ->
             if (toText == null || isTranslating) {
                 IdleTranslateTextField(
                     fromText = fromText,
@@ -109,8 +107,8 @@ fun IdleTranslateTextField(
         BasicTextField(
             value = fromText,
             onValueChange = onTextChange,
-            cursorBrush = SolidColor(MaterialTheme.colors.onSurface),
-            textStyle = TextStyle(color = MaterialTheme.colors.onSurface),
+            cursorBrush = SolidColor(MaterialTheme.colorScheme.onSurface),
+            textStyle = TextStyle(color = MaterialTheme.colorScheme.onSurface),
             modifier = Modifier
                 .fillMaxSize()
                 .onFocusChanged { isFocused = it.isFocused },
@@ -118,7 +116,6 @@ fun IdleTranslateTextField(
         if (fromText.isEmpty() && !isFocused) {
             Text(
                 text = stringResource(id = R.string.translate_hint),
-                color = LightBlue
             )
         }
         ProgressButton(
@@ -146,7 +143,7 @@ fun TranslatedTextField(
     ) {
         LanguageDisplay(language = fromLanguage)
         Spacer(modifier = Modifier.height(16.dp))
-        Text(text = fromText, color = MaterialTheme.colors.onSurface)
+        Text(text = fromText, color = MaterialTheme.colorScheme.onSurface)
         Spacer(modifier = Modifier.height(16.dp))
         Row(
             modifier = Modifier.align(Alignment.End)
@@ -167,11 +164,11 @@ fun TranslatedTextField(
             }
         }
         Spacer(modifier = Modifier.height(16.dp))
-        Divider()
+        HorizontalDivider()
         Spacer(modifier = Modifier.height(16.dp))
         LanguageDisplay(language = toLanguage)
         Spacer(modifier = Modifier.height(16.dp))
-        Text(text = toText, color = MaterialTheme.colors.onSurface)
+        Text(text = toText, color = MaterialTheme.colorScheme.onSurface)
         Spacer(modifier = Modifier.height(16.dp))
         Row(
             modifier = Modifier.align(Alignment.End)
