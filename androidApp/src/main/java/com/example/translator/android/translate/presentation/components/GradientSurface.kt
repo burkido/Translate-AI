@@ -6,15 +6,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 
 fun Modifier.gradientSurface(): Modifier = composed {
     if (isSystemInDarkTheme()) {
         Modifier.background(
             brush = Brush.verticalGradient(
                 colors = listOf(
-                    Color(0xFF23262E),
-                    Color(0xFF212329)
+                    MaterialTheme.colorScheme.background,
+                    MaterialTheme.colorScheme.onSecondary
                 )
             )
         )
