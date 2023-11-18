@@ -150,7 +150,7 @@ fun TranslatedTextField(
         ) {
             IconButton(onClick = { onCopyClick(fromText) }) {
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.copy),
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_baseline_content_copy_24),
                     contentDescription = stringResource(id = R.string.copy),
                     tint = LightBlue
                 )
@@ -175,7 +175,7 @@ fun TranslatedTextField(
         ) {
             IconButton(onClick = { onCopyClick(toText) }) {
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.copy),
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_baseline_content_copy_24),
                     contentDescription = stringResource(id = R.string.copy),
                     tint = LightBlue
                 )

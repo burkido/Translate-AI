@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -33,6 +34,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.translator.android.R
 import com.example.translator.android.translate.presentation.components.LanguageDropDown
@@ -40,6 +42,7 @@ import com.example.translator.android.translate.presentation.components.SmallLan
 import com.example.translator.android.translate.presentation.components.SwapLanguagesButton
 import com.example.translator.android.translate.presentation.components.TranslateTextField
 import com.example.translator.android.translate.presentation.components.gradientSurface
+import com.example.translator.core.presentation.UiLanguage
 import com.example.translator.translate.domain.translate.TranslateError
 import com.example.translator.translate.presentation.TranslateEvent
 import com.example.translator.translate.presentation.TranslateState
@@ -83,7 +86,6 @@ fun TranslateHistoryItem(
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun TranslateScreen(
     state: TranslateState,
@@ -111,11 +113,12 @@ fun TranslateScreen(
                 onClick = { onEvent(TranslateEvent.RecordAudio) },
                 containerColor = MaterialTheme.colorScheme.primary,
                 contentColor = MaterialTheme.colorScheme.onPrimary,
-                modifier = Modifier.size(56.dp)
+                modifier = Modifier.size(56.dp).clip(RoundedCornerShape(16.dp))
             ) {
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.mic),
-                    contentDescription = "Record Audio"
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_baseline_mic_24),
+                    contentDescription = "Record Audio",
+                    modifier = Modifier.size(24.dp)
                 )
             }
         },
@@ -202,4 +205,80 @@ fun TranslateScreen(
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun TranslateScreenPreview() {
+    TranslateScreen(
+        state = TranslateState(
+            fromLanguage = UiLanguage.byCode("en"),
+            toLanguage = UiLanguage.byCode("tr"),
+            fromText = "Hello",
+            toText = "Merhaba",
+            isTranslating = false,
+            isChoosingFromLanguage = false,
+            isChoosingToLanguage = false,
+            history = listOf(
+                UiHistoryItem(
+                    id = 1,
+                    fromLanguage = UiLanguage.byCode("en"),
+                    toLanguage = UiLanguage.byCode("tr"),
+                    fromText = "Hello",
+                    toText = "Merhaba"
+                ),
+                UiHistoryItem(
+                    id = 2,
+                    fromLanguage = UiLanguage.byCode("en"),
+                    toLanguage = UiLanguage.byCode("tr"),
+                    fromText = "Hello",
+                    toText = "Merhaba"
+                ),
+                UiHistoryItem(
+                    id = 3,
+                    fromLanguage = UiLanguage.byCode("en"),
+                    toLanguage = UiLanguage.byCode("tr"),
+                    fromText = "Hello",
+                    toText = "Merhaba"
+                ),
+                UiHistoryItem(
+                    id = 4,
+                    fromLanguage = UiLanguage.byCode("en"),
+                    toLanguage = UiLanguage.byCode("tr"),
+                    fromText = "Hello",
+                    toText = "Merhaba"
+                ),
+                UiHistoryItem(
+                    id = 5,
+                    fromLanguage = UiLanguage.byCode("en"),
+                    toLanguage = UiLanguage.byCode("tr"),
+                    fromText = "Hello",
+                    toText = "Merhaba"
+                ),
+                UiHistoryItem(
+                    id = 6,
+                    fromLanguage = UiLanguage.byCode("en"),
+                    toLanguage = UiLanguage.byCode("tr"),
+                    fromText = "Hello",
+                    toText = "Merhaba"
+                ),
+                UiHistoryItem(
+                    id = 7,
+                    fromLanguage = UiLanguage.byCode("en"),
+                    toLanguage = UiLanguage.byCode("tr"),
+                    fromText = "Hello",
+                    toText = "Merhaba"
+                ),
+                UiHistoryItem(
+                    id = 8,
+                    fromLanguage = UiLanguage.byCode("en"),
+                    toLanguage = UiLanguage.byCode("tr"),
+                    fromText = "Hello",
+                    toText = "Merhaba"
+                ),
+            )
+        ),
+        onEvent = {}
+    )
+    
 }

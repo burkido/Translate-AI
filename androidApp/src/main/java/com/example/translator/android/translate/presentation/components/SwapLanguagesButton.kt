@@ -25,7 +25,7 @@ fun SwapLanguagesButton(
             .background(MaterialTheme.colorScheme.primary)
     ) {
         Icon(
-            imageVector = ImageVector.vectorResource(id = R.drawable.swap_languages),
+            imageVector = ImageVector.vectorResource(id = R.drawable.ic_baseline_swap_horiz_24),
             contentDescription = stringResource(id = R.string.swap_languages),
             tint = MaterialTheme.colorScheme.onPrimary
         )

@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
@@ -32,6 +33,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -82,7 +84,7 @@ fun SpeechToTextScreen(
                     },
                     containerColor = MaterialTheme.colorScheme.primary,
                     contentColor = MaterialTheme.colorScheme.onPrimary,
-                    modifier = Modifier.size(56.dp)
+                    modifier = Modifier.size(56.dp).clip(RoundedCornerShape(16.dp))
                 ) {
                     AnimatedContent(targetState = state.displayState, label = "") { displayState ->
                         when (displayState) {
@@ -90,7 +92,7 @@ fun SpeechToTextScreen(
                                 Icon(
                                     imageVector = Icons.Rounded.Close,
                                     contentDescription = "Stop recording",
-                                    modifier = Modifier.size(50.dp)
+                                    modifier = Modifier.size(24.dp)
                                 )
                             }
 
@@ -98,15 +100,15 @@ fun SpeechToTextScreen(
                                 Icon(
                                     imageVector = Icons.Rounded.Check,
                                     contentDescription = "Apply",
-                                    modifier = Modifier.size(50.dp)
+                                    modifier = Modifier.size(24.dp)
                                 )
                             }
 
                             else -> {
                                 Icon(
-                                    imageVector = ImageVector.vectorResource(id = R.drawable.mic),
+                                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_baseline_mic_24),
                                     contentDescription = "Record audio",
-                                    modifier = Modifier.size(50.dp)
+                                    modifier = Modifier.size(24.dp)
                                 )
                             }
                         }
@@ -134,9 +136,7 @@ fun SpeechToTextScreen(
         ) {
             Box(modifier = Modifier.fillMaxWidth()) {
                 IconButton(
-                    onClick = {
-                        onEvent(SpeechToTextEvent.Close)
-                    },
+                    onClick = { onEvent(SpeechToTextEvent.Close) },
                     modifier = Modifier.align(Alignment.CenterStart)
                 ) {
                     Icon(
