@@ -7,9 +7,11 @@
     <string name="translate">Translate</string>
     <string name="copy">Copy</string>
     <string name="copied">Text copied to clipboard</string>
-    <string name="speech_recognition_not_available">Speech recognition not avaliable. Please try again later</string>
+    <string name="speech_recognition_not_available">Speech recognition not available. Please try again later</string>
     <string name="error_service_unavailable">Sorry service unavailable :(</string>
     <string name="client_error">An error occurred check your internet connection</string>
-    <string name="server_error">An error occured. Probably we are working on it</string>
+    <string name="server_error">An error occurred. Probably we are working on it</string>
     <string name="unknown_error">We don\'t know what happened :)</string>
+    <string name="saved">Saved</string>
+    <string name="tab_translate">Home</string>
 </resources>
