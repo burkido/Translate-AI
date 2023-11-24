@@ -12,30 +12,21 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.example.translator.android.core.components.BottomNavigationBar
 import com.example.translator.android.core.components.NavigationActions
 import com.example.translator.android.core.components.TopLevelDestinations
-import com.example.translator.android.core.presentation.Routes
-import com.example.translator.android.translate.presentation.AndroidTranslateViewModel
-import com.example.translator.android.translate.presentation.TranslateScreen
-import com.example.translator.android.voicetotext.presentation.AndroidSpeechToTextViewModel
-import com.example.translator.android.voicetotext.presentation.SpeechToTextScreen
-import com.example.translator.translate.presentation.TranslateEvent
-import com.example.translator.voicetotext.presentation.SpeechToTextEvent
+import com.example.translator.android.saved.navigation.savedGraph
+import com.example.translator.android.translate.presentation.navigation.translateGraph
+import com.example.translator.android.translate.presentation.navigation.translate_route
+import com.example.translator.android.voicetotext.navigation.voiceToTextGraph
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -119,61 +110,13 @@ fun TranslateRoot(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.TRANSLATE,
+        startDestination = translate_route,
         modifier = modifier
     ) {
-        // TODO: add nav graph builder here
-        composable(route = Routes.TRANSLATE) {
-            val viewModel = hiltViewModel<AndroidTranslateViewModel>()
-            val state by viewModel.uiState.collectAsState()
-
-            val voiceResult by it
-                .savedStateHandle
-                .getStateFlow<String?>("voiceResult", null)
-                .collectAsState()
-
-            LaunchedEffect(voiceResult) {
-                viewModel.onEvent(TranslateEvent.SubmitVoiceResult(voiceResult))
-                it.savedStateHandle["voiceResult"] = null
-            }
-            TranslateScreen(
-                state = state,
-                onEvent = { event ->
-                    when (event) {
-                        is TranslateEvent.RecordAudio -> navController.navigate(Routes.VOICE_TO_TEXT + "/${state.fromLanguage.language.langCode}")
-                        else -> viewModel.onEvent(event)
-                    }
-                }
-            )
-        }
-
-        composable(
-            route = Routes.VOICE_TO_TEXT + "/{languageCode}",
-            arguments = listOf(
-                navArgument("languageCode") {
-                    type = NavType.StringType
-                    defaultValue = "en"
-                }
-            )
-        ) { backStackEntry ->
-            val languageCode = backStackEntry.arguments?.getString("languageCode") ?: "en"
-            val viewModel = hiltViewModel<AndroidSpeechToTextViewModel>()
-            val state by viewModel.state.collectAsState()
-
-            SpeechToTextScreen(
-                state = state,
-                languageCode = languageCode,
-                onResult = { text ->
-                    navController.previousBackStackEntry?.savedStateHandle?.set("voiceResult", text)
-                    navController.popBackStack()
-                },
-                onEvent = { event ->
-                    when (event) {
-                        is SpeechToTextEvent.Close -> navController.popBackStack()
-                        else -> viewModel.onEvent(event)
-                    }
-                }
-            )
-        }
+        translateGraph(
+            navController = navController,
+        )
+        savedGraph()
+        voiceToTextGraph(navController = navController)
     }
 }
