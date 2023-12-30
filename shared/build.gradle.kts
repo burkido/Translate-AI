@@ -90,3 +90,7 @@ sqldelight {
         sourceFolders = listOf("sqldelight")
     }
 }
+
+task("testClasses").doLast {
+    println("Just for make gradle to be happy :)")
+}
