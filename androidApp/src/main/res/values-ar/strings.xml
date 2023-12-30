@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="close">إغلاق</string>
+    <string name="open">فتح</string>
+    <string name="swap_languages">تبديل اللغات</string>
+    <string name="translate_hint">أدخل النص للترجمة</string>
+    <string name="translate">ترجمة</string>
+    <string name="copy">نسخ</string>
+    <string name="copied">تم نسخ النص إلى الحافظة</string>
+    <string name="speech_recognition_not_available">لا يتوفر التعرف على الصوت. يرجى المحاولة مرة أخرى لاحقًا</string>
+    <string name="error_service_unavailable">عذرًا، الخدمة غير متاحة :(</string>
+    <string name="client_error">حدث خطأ، يرجى التحقق من اتصال الإنترنت</string>
+    <string name="server_error">حدث خطأ. ربما نعمل على حله</string>
+    <string name="unknown_error">لسنا نعلم ماذا حدث :)</string>
+    <string name="saved">تم الحفظ</string>
+    <string name="tab_translate">الرئيسية</string>
+    <string name="save">حفظ الترجمة الحالية</string>
+    <string name="history">التاريخ</string>
+    <string name="cd_add_to_favorite">إضافة عنصر التاريخ إلى المفضلة</string>
+    <string name="delete_all">حذف جميع عناصر التاريخ المحفوظة</string>
+</resources>
