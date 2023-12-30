@@ -70,7 +70,7 @@ class SqlDelightHistoryDataSource(
         return queries.getHistoryEntity(id = id).executeAsOneOrNull()?.toHistoryItem()
     }
 
-    override fun clearSavedHistories() {
+    override fun clearSavedHistory() {
         queries.clearSavedHistory()
     }
 }

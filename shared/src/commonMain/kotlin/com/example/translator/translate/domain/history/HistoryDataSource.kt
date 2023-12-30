@@ -20,5 +20,5 @@ interface HistoryDataSource {
 
     suspend fun getSavedHistoryItem(id: Long): HistoryItem?
 
-    fun clearSavedHistories()
+    fun clearSavedHistory()
 }

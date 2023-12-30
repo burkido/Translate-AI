@@ -51,8 +51,6 @@ fun TranslateScreen(
     onEvent: (TranslateEvent) -> Unit
 ) {
 
-    Log.d("save-test", "TranslateScreen: ${state.history}")
-
     val context = LocalContext.current
 
     LaunchedEffect(key1 = state.error) {

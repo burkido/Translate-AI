@@ -50,8 +50,6 @@ fun SavedScreen(
     state: SavedState,
     onEvent: (SavedEvent) -> Unit,
 ) {
-    Log.d("save-test", "SavedScreen: ${state.savedTranslations}")
-
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()

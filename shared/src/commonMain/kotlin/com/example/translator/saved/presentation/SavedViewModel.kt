@@ -52,18 +52,12 @@ class SavedViewModel(
         when (event) {
             SavedEvent.DeleteAllTranslations -> {
                 viewModelScope.launch {
-                    historyDataSource.clearHistory()
+                    historyDataSource.clearSavedHistory()
                 }
             }
 
             SavedEvent.OnErrorSeen -> {
                 _state.update { it.copy(userMessage = null) }
-            }
-
-            is SavedEvent.DeleteTranslationById -> {
-                viewModelScope.launch {
-                    historyDataSource.deleteHistoryItem(event.id)
-                }
             }
 
             is SavedEvent.ToggleTranslationSaveStatus -> {
