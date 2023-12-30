@@ -12,8 +12,8 @@ fun Modifier.gradientSurface(): Modifier = composed {
         Modifier.background(
             brush = Brush.verticalGradient(
                 colors = listOf(
-                    MaterialTheme.colorScheme.background,
-                    MaterialTheme.colorScheme.onSecondary
+                    MaterialTheme.colorScheme.surfaceBright,
+                    MaterialTheme.colorScheme.background
                 )
             )
         )
