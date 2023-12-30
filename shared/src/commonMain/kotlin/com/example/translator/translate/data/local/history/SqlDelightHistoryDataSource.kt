@@ -65,4 +65,8 @@ class SqlDelightHistoryDataSource(
             }
             .asCommonFlow()
     }
+
+    override fun clearSavedHistories() {
+        queries.clearSavedHistory()
+    }
 }

@@ -35,6 +35,12 @@ clearHistory:
 DELETE
 FROM historyEntity;
 
+getSavedHistory:
+SELECT *
+FROM historyEntity
+WHERE isSaved = 1
+ORDER BY timestamp DESC;
+
 saveHistoryEntity:
 UPDATE historyEntity
 SET isSaved = 1
@@ -45,8 +51,6 @@ UPDATE historyEntity
 SET isSaved = 0
 WHERE id = ?;
 
-getSavedHistory:
-SELECT *
-FROM historyEntity
-WHERE isSaved = 1
-ORDER BY timestamp DESC;
+clearSavedHistory:
+UPDATE historyEntity
+SET isSaved = 0;
