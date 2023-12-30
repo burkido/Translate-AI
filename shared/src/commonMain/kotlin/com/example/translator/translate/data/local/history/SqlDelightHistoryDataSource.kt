@@ -12,7 +12,7 @@ import kotlinx.datetime.Clock
 
 class SqlDelightHistoryDataSource(
     db: TranslateDatabase
-): HistoryDataSource {
+) : HistoryDataSource {
 
     private val queries = db.translateQueries
 
@@ -34,15 +34,35 @@ class SqlDelightHistoryDataSource(
             toLanguageCode = item.toLanguageCode,
             fromText = item.fromText,
             toText = item.toText,
+            isSaved = if (item.isSaved) 1L else 0L,
             timestamp = Clock.System.now().toEpochMilliseconds()
         )
     }
 
-    override suspend fun clearHistory() {
-        //queries.clearHistory()
+    override suspend fun deleteHistoryItem(id: Long) {
+        queries.deleteHistoryEntity(id = id)
     }
 
-    override suspend fun saveTranslation(item: HistoryItem) {
-        TODO("Not yet implemented")
+    override suspend fun clearHistory() {
+        queries.clearHistory()
+    }
+
+    override suspend fun saveHistory(id: Long) {
+        queries.saveHistoryEntity(id = id)
+    }
+
+    override suspend fun unSaveHistory(id: Long) {
+        queries.unSaveHistoryEntity(id = id)
+    }
+
+    override fun getSavedHistories(): CommonFlow<List<HistoryItem>> {
+        return queries
+            .getSavedHistory()
+            .asFlow()
+            .mapToList()
+            .map { history ->
+                history.map { it.toHistoryItem() }
+            }
+            .asCommonFlow()
     }
 }

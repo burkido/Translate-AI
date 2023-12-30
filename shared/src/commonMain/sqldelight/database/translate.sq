@@ -4,6 +4,7 @@ CREATE TABLE historyEntity(
     fromText TEXT NOT NULL,
     toLanguageCode TEXT NOT NULL,
     toText TEXT NOT NULL,
+    isSaved INTEGER NOT NULL DEFAULT 0,
     timestamp INTEGER NOT NULL
 );
 
@@ -20,6 +21,32 @@ INTO historyEntity(
     fromText,
     toLanguageCode,
     toText,
+    isSaved,
     timestamp
 )
-VALUES(?, ?, ?, ?, ?, ?);
+VALUES(?, ?, ?, ?, ?, ?, ?);
+
+deleteHistoryEntity:
+DELETE
+FROM historyEntity
+WHERE id = ?;
+
+clearHistory:
+DELETE
+FROM historyEntity;
+
+saveHistoryEntity:
+UPDATE historyEntity
+SET isSaved = 1
+WHERE id = ?;
+
+unSaveHistoryEntity:
+UPDATE historyEntity
+SET isSaved = 0
+WHERE id = ?;
+
+getSavedHistory:
+SELECT *
+FROM historyEntity
+WHERE isSaved = 1
+ORDER BY timestamp DESC;

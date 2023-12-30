@@ -8,7 +8,13 @@ interface HistoryDataSource {
 
     suspend fun insertHistoryItem(item: HistoryItem)
 
+    suspend fun deleteHistoryItem(id: Long)
+
     suspend fun clearHistory()
 
-    suspend fun saveTranslation(item: HistoryItem)
+    suspend fun saveHistory(id: Long)
+
+    suspend fun unSaveHistory(id: Long)
+
+    fun getSavedHistories(): CommonFlow<List<HistoryItem>>
 }
