@@ -160,6 +160,7 @@ class TranslateViewModel(
             }
 
             TranslateEvent.Translate -> translate(state.value)
+
             is TranslateEvent.ToggleTranslationSaveStatus -> {
                 viewModelScope.launch {
                     val item = historyDataSource.getSavedHistoryItem(event.id)
@@ -172,6 +173,13 @@ class TranslateViewModel(
                     }
                 }
             }
+
+            TranslateEvent.DeleteHistory -> {
+                viewModelScope.launch {
+                    historyDataSource.clearHistory()
+                }
+            }
+
             else -> Unit
         }
     }

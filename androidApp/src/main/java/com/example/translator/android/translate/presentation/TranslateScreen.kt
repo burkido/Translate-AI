@@ -1,6 +1,5 @@
 package com.example.translator.android.translate.presentation
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -192,7 +191,7 @@ fun TranslateTopBar(onEvent: (TranslateEvent) -> Unit) {
             style = MaterialTheme.typography.titleMedium
         )
         Spacer(modifier = Modifier.weight(1f))
-        IconButton(onClick = { onEvent(TranslateEvent.OpenFromLanguageDropdown) }) {
+        IconButton(onClick = { onEvent(TranslateEvent.DeleteHistory) }) {
             Icon(
                 imageVector = Icons.Filled.Delete,
                 contentDescription = stringResource(id = R.string.delete_all),

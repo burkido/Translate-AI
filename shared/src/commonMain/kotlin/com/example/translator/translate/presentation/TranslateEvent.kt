@@ -14,6 +14,7 @@ sealed class TranslateEvent {
     object OpenToLanguageDropdown : TranslateEvent()
     object CloseTranslation : TranslateEvent()
     data class ToggleTranslationSaveStatus(val id: Long) : TranslateEvent()
+    object DeleteHistory : TranslateEvent()
     data class SelectHistoryItem(val item: UiHistoryItem) : TranslateEvent()
     object EditTranslation : TranslateEvent()
     object RecordAudio : TranslateEvent()
