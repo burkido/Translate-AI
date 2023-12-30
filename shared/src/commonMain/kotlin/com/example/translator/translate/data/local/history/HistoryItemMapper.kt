@@ -9,4 +9,5 @@ fun HistoryEntity.toHistoryItem(): HistoryItem = HistoryItem(
     fromText = fromText,
     toLanguageCode = toLanguageCode,
     toText = toText,
+    isSaved = isSaved != 0L
 )
