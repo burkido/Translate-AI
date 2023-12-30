@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="close">Kapat</string>
+    <string name="open">Aç</string>
+    <string name="swap_languages">Dilleri Değiştir</string>
+    <string name="translate_hint">Çevirmek için bir metin girin</string>
+    <string name="translate">Çevir</string>
+    <string name="copy">Kopyala</string>
+    <string name="copied">Metin panosuna kopyalandı</string>
+    <string name="speech_recognition_not_available">Konuşma tanıma kullanılamıyor. Lütfen daha sonra tekrar deneyin</string>
+    <string name="error_service_unavailable">Üzgünüz, servis kullanılamıyor :(</string>
+    <string name="client_error">Bir hata oluştu, internet bağlantınızı kontrol edin</string>
+    <string name="server_error">Bir hata oluştu. Muhtemelen üzerinde çalışıyoruz</string>
+    <string name="unknown_error">Ne olduğunu bilmiyoruz :)</string>
+    <string name="saved">Kaydedildi</string>
+    <string name="tab_translate">Ana Sayfa</string>
+    <string name="save">Mevcut çeviriyi kaydet</string>
+    <string name="history">Geçmiş</string>
+    <string name="cd_add_to_favorite">Geçmiş öğesini favorilere ekle</string>
+    <string name="delete_all">Tüm Kaydedilmiş Geçmiş Öğelerini Sil</string>
+</resources>

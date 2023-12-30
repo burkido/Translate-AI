@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="close">关闭</string>
+    <string name="open">打开</string>
+    <string name="swap_languages">切换语言</string>
+    <string name="translate_hint">输入要翻译的文本</string>
+    <string name="translate">翻译</string>
+    <string name="copy">复制</string>
+    <string name="copied">文本已复制到剪贴板</string>
+    <string name="speech_recognition_not_available">语音识别不可用，请稍后再试</string>
+    <string name="error_service_unavailable">抱歉，服务不可用 :(</string>
+    <string name="client_error">发生错误，请检查您的互联网连接</string>
+    <string name="server_error">发生错误。可能我们正在处理中</string>
+    <string name="unknown_error">我们不知道发生了什么 :)</string>
+    <string name="saved">已保存</string>
+    <string name="tab_translate">主页</string>
+    <string name="save">保存当前翻译</string>
+    <string name="history">历史记录</string>
+    <string name="cd_add_to_favorite">将历史项目添加到收藏夹</string>
+    <string name="delete_all">删除所有保存的历史项目</string>
+</resources>

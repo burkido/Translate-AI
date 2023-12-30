@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="close">बंद करें</string>
+    <string name="open">खोलें</string>
+    <string name="swap_languages">भाषाएँ बदलें</string>
+    <string name="translate_hint">अनुवाद करने के लिए एक पाठ दर्ज करें</string>
+    <string name="translate">अनुवाद करें</string>
+    <string name="copy">कॉपी करें</string>
+    <string name="copied">टेक्स्ट क्लिपबोर्ड पर कॉपी किया गया</string>
+    <string name="speech_recognition_not_available">वाणी सिद्धांत उपलब्ध नहीं है। कृपया बाद में पुनः प्रयास करें</string>
+    <string name="error_service_unavailable">माफ़ करें, सेवा अनुपलब्ध है :(</string>
+    <string name="client_error">एक त्रुटि हुई, अपना इंटरनेट कनेक्शन जांचें</string>
+    <string name="server_error">एक त्रुटि हुई। शायद हम इस पर काम कर रहे हैं</string>
+    <string name="unknown_error">हमें यह नहीं पता कि क्या हुआ है :)</string>
+    <string name="saved">सहेजा गया</string>
+    <string name="tab_translate">होम</string>
+    <string name="save">वर्तमान अनुवाद को सहेजें</string>
+    <string name="history">इतिहास</string>
+    <string name="cd_add_to_favorite">इतिहास आइटम को पसंदीदा में जोड़ें</string>
+    <string name="delete_all">सभी सहेजे गए इतिहास आइटम्स को हटाएं</string>
+</resources>

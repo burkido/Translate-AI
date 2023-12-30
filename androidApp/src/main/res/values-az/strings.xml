@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="close">Bağla</string>
+    <string name="open">Aç</string>
+    <string name="swap_languages">Dilləri Dəyiş</string>
+    <string name="translate_hint">Tərcümə üçün mətn daxil edin</string>
+    <string name="translate">Tərcümə et</string>
+    <string name="copy">Köçür</string>
+    <string name="copied">Mətn köçürüldü</string>
+    <string name="speech_recognition_not_available">Sözün tanınması mövcud deyil. Zəhmət olmasa daha sonra cəhd edin</string>
+    <string name="error_service_unavailable">Üzr istəyirik, xidmət mövcud deyil :(</string>
+    <string name="client_error">Bir xəta baş verdi, internet bağlantınızı yoxlayın</string>
+    <string name="server_error">Bir xəta baş verdi. Ən yaxın zamanda düzəltəcəyik</string>
+    <string name="unknown_error">Nə baş verdiyini bilmirik :)</string>
+    <string name="saved">Saxlanıldı</string>
+    <string name="tab_translate">Əsas</string>
+    <string name="save">Cari tərcüməni saxla</string>
+    <string name="history">Tarix</string>
+    <string name="cd_add_to_favorite">Tarix əşyğını seçilmişlərə əlavə edin</string>
+    <string name="delete_all">Bütün saxlanılan tarix əşyklərini sil</string>
+</resources>

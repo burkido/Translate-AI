@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="close">Chiudi</string>
+    <string name="open">Apri</string>
+    <string name="swap_languages">Scambia lingue</string>
+    <string name="translate_hint">Inserisci un testo da tradurre</string>
+    <string name="translate">Traduci</string>
+    <string name="copy">Copia</string>
+    <string name="copied">Testo copiato negli appunti</string>
+    <string name="speech_recognition_not_available">Riconoscimento vocale non disponibile. Riprova più tardi</string>
+    <string name="error_service_unavailable">Spiacenti, servizio non disponibile :(</string>
+    <string name="client_error">Si è verificato un errore, controlla la tua connessione Internet</string>
+    <string name="server_error">Si è verificato un errore. Probabilmente stiamo lavorando su di esso</string>
+    <string name="unknown_error">Non sappiamo cosa sia successo :)</string>
+    <string name="saved">Salvato</string>
+    <string name="tab_translate">Home</string>
+    <string name="save">Salva la traduzione corrente</string>
+    <string name="history">Cronologia</string>
+    <string name="cd_add_to_favorite">Aggiungi elemento della cronologia ai preferiti</string>
+    <string name="delete_all">Elimina tutti gli elementi salvati nella cronologia</string>
+</resources>

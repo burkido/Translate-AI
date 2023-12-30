@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="close">Cerrar</string>
+    <string name="open">Abrir</string>
+    <string name="swap_languages">Cambiar idiomas</string>
+    <string name="translate_hint">Ingresa un texto para traducir</string>
+    <string name="translate">Traducir</string>
+    <string name="copy">Copiar</string>
+    <string name="copied">Texto copiado al portapapeles</string>
+    <string name="speech_recognition_not_available">Reconocimiento de voz no disponible. Por favor, inténtalo de nuevo más tarde</string>
+    <string name="error_service_unavailable">Lo siento, servicio no disponible :(</string>
+    <string name="client_error">Ha ocurrido un error. Verifica tu conexión a Internet</string>
+    <string name="server_error">Ha ocurrido un error. Probablemente estamos trabajando en ello</string>
+    <string name="unknown_error">No sabemos qué ha sucedido :)</string>
+    <string name="saved">Guardado</string>
+    <string name="tab_translate">Inicio</string>
+    <string name="save">Guardar traducción actual</string>
+    <string name="history">Historial</string>
+    <string name="cd_add_to_favorite">Agregar elemento al historial a favoritos</string>
+    <string name="delete_all">Eliminar todos los elementos guardados en el historial</string>
+</resources>
