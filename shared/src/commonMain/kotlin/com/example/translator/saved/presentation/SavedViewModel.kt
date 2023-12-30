@@ -1,45 +1,69 @@
 package com.example.translator.saved.presentation
 
+import com.example.translator.core.domain.util.asCommonStateFlow
 import com.example.translator.core.presentation.UiLanguage
+import com.example.translator.translate.domain.history.HistoryDataSource
 import com.example.translator.translate.presentation.UiHistoryItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class SavedViewModel(
-
+    private val historyDataSource: HistoryDataSource,
     private val coroutineScope: CoroutineScope?,
-    historyDataSource: Any
 ) {
 
     private val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)
 
-//    private val _state = MutableStateFlow(SavedState())
-//    val state = combine(
-//        _state,
-//        historyDataSource.getSavedTranslations()
-//    ) { state, savedTranslations ->
-//        if (state.savedTranslations != savedTranslations) {
-//            state.copy(
-//                savedTranslations = savedTranslations.mapNotNull { item ->
-//                    item.id?.let {
-//                        UiHistoryItem(
-//                            id = it,
-//                            fromText = item.fromText,
-//                            toText = item.toText,
-//                            fromLanguage = UiLanguage.byCode(item.fromLanguageCode),
-//                            toLanguage = UiLanguage.byCode(item.toLanguageCode)
-//                        )
-//                    }
-//                }
-//            )
-//        } else
-//            state
-//    }.stateIn(
-//        scope = viewModelScope,
-//        started = SharingStarted.WhileSubscribed(5000),
-//        initialValue = SavedState()
-//    ).asCommonStateFlow()
+    private val _state = MutableStateFlow(SavedState())
+    val state = combine(
+        _state,
+        historyDataSource.getSavedHistories()
+    ) { state, savedTranslations ->
+        if (state.savedTranslations != savedTranslations) {
+            state.copy(
+                savedTranslations = savedTranslations.mapNotNull { item ->
+                    item.id?.let {
+                        UiHistoryItem(
+                            id = it,
+                            fromText = item.fromText,
+                            toText = item.toText,
+                            fromLanguage = UiLanguage.byCode(item.fromLanguageCode),
+                            toLanguage = UiLanguage.byCode(item.toLanguageCode)
+                        )
+                    }
+                }
+            )
+        } else
+            state
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = SavedState()
+    ).asCommonStateFlow()
+
+    fun onEvent(event: SavedEvent) {
+        when (event) {
+            SavedEvent.DeleteAllTranslations -> {
+                viewModelScope.launch {
+                    historyDataSource.clearHistory()
+                }
+            }
+
+            SavedEvent.OnErrorSeen -> {
+                _state.update { it.copy(userMessage = null) }
+            }
+
+            is SavedEvent.DeleteTranslationById -> {
+                viewModelScope.launch {
+                    historyDataSource.deleteHistoryItem(event.id)
+                }
+            }
+        }
+    }
 }

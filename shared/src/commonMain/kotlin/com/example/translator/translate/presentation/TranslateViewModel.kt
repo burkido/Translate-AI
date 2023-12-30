@@ -62,6 +62,7 @@ class TranslateViewModel(
                     it.copy(fromText = event.text)
                 }
             }
+
             is TranslateEvent.ChooseFromLanguage -> {
                 _state.update {
                     it.copy(
@@ -70,80 +71,100 @@ class TranslateViewModel(
                     )
                 }
             }
+
             is TranslateEvent.ChooseToLanguage -> {
-                val newState = _state.updateAndGet { it.copy(
-                    isChoosingToLanguage = false,
-                    toLanguage = event.language
-                ) }
+                val newState = _state.updateAndGet {
+                    it.copy(
+                        isChoosingToLanguage = false,
+                        toLanguage = event.language
+                    )
+                }
                 translate(newState)
             }
+
             TranslateEvent.CloseTranslation -> {
-                _state.update { it.copy(
-                    isTranslating = false,
-                    fromText = "",
-                    toText = null,
-                ) }
-            }
-            TranslateEvent.EditTranslation -> {
-                state.value.toText?.let {
-                    _state.update { it.copy(
+                _state.update {
+                    it.copy(
                         isTranslating = false,
+                        fromText = "",
                         toText = null,
-                    ) }
+                    )
                 }
             }
+
+            TranslateEvent.EditTranslation -> {
+                state.value.toText?.let {
+                    _state.update {
+                        it.copy(
+                            isTranslating = false,
+                            toText = null,
+                        )
+                    }
+                }
+            }
+
             TranslateEvent.OnErrorSeen -> {
                 _state.update { it.copy(error = null) }
             }
+
             TranslateEvent.OpenFromLanguageDropdown -> {
                 _state.update { it.copy(isChoosingFromLanguage = true) }
             }
+
             TranslateEvent.OpenToLanguageDropdown -> {
                 _state.update { it.copy(isChoosingToLanguage = true) }
             }
+
             is TranslateEvent.SelectHistoryItem -> {
                 translateJob?.cancel()
-                _state.update { it.copy(
-                    fromText = event.item.fromText,
-                    toText = event.item.toText,
-                    isTranslating = false,
-                    fromLanguage = event.item.fromLanguage,
-                    toLanguage = event.item.toLanguage,
-                ) }
-            }
-            TranslateEvent.StopChoosingLanguage -> {
-                _state.update { it.copy(
-                    isChoosingFromLanguage = false,
-                    isChoosingToLanguage = false
-                ) }
-            }
-            is TranslateEvent.SubmitVoiceResult -> {
-                _state.update { it.copy(
-                    fromText = event.result ?: it.fromText,
-                    isTranslating = if (event.result != null) false else it.isTranslating,
-                    toText = if (event.result != null) null else it.toText
-                ) }
-            }
-            TranslateEvent.SwapLanguages -> {
-                _state.update { it.copy(
-                    fromLanguage = it.toLanguage,
-                    toLanguage = it.fromLanguage,
-                    fromText = it.toText ?: "",
-                    toText = if(it.toText != null) it.fromText else null
-                ) }
-            }
-            TranslateEvent.Translate -> translate(state.value)
-            TranslateEvent.SaveTranslation -> {
-                val state = state.value
-                viewModelScope.launch {
-//                    historyDataSource.saveTranslation(
-//                        fromText = state.fromText,
-//                        toText = state.toText ?: "",
-//                        fromLanguageCode = state.fromLanguage.language,
-//                        toLanguageCode = state.toLanguage.language
-//                    )
+                _state.update {
+                    it.copy(
+                        fromText = event.item.fromText,
+                        toText = event.item.toText,
+                        isTranslating = false,
+                        fromLanguage = event.item.fromLanguage,
+                        toLanguage = event.item.toLanguage,
+                    )
                 }
             }
+
+            TranslateEvent.StopChoosingLanguage -> {
+                _state.update {
+                    it.copy(
+                        isChoosingFromLanguage = false,
+                        isChoosingToLanguage = false
+                    )
+                }
+            }
+
+            is TranslateEvent.SubmitVoiceResult -> {
+                _state.update {
+                    it.copy(
+                        fromText = event.result ?: it.fromText,
+                        isTranslating = if (event.result != null) false else it.isTranslating,
+                        toText = if (event.result != null) null else it.toText
+                    )
+                }
+            }
+
+            TranslateEvent.SwapLanguages -> {
+                _state.update {
+                    it.copy(
+                        fromLanguage = it.toLanguage,
+                        toLanguage = it.fromLanguage,
+                        fromText = it.toText ?: "",
+                        toText = if (it.toText != null) it.fromText else null
+                    )
+                }
+            }
+
+            TranslateEvent.Translate -> translate(state.value)
+            is TranslateEvent.SaveTranslation -> {
+                viewModelScope.launch {
+                    historyDataSource.saveHistory(id = event.id)
+                }
+            }
+
             else -> Unit
         }
     }
@@ -160,17 +181,22 @@ class TranslateViewModel(
                 toLanguage = state.toLanguage.language
             )
 
-            when(result) {
+            when (result) {
                 is Resource.Success -> {
-                    _state.update { it.copy(
-                        isTranslating = false,
-                        toText = result.data
-                    ) }
+                    _state.update {
+                        it.copy(
+                            isTranslating = false,
+                            toText = result.data
+                        )
+                    }
                 }
-                is Resource.Error -> _state.update { it.copy(
-                    isTranslating = false,
-                    error = (result.throwable as? TranslateException)?.error
-                ) }
+
+                is Resource.Error -> _state.update {
+                    it.copy(
+                        isTranslating = false,
+                        error = (result.throwable as? TranslateException)?.error
+                    )
+                }
             }
         }
     }
