@@ -44,6 +44,7 @@ import com.example.translator.android.R
 import com.example.translator.android.translate.presentation.components.LanguageDropDown
 import com.example.translator.android.translate.presentation.components.SmallLanguageIcon
 import com.example.translator.android.translate.presentation.components.SwapLanguagesButton
+import com.example.translator.android.translate.presentation.components.TranslateHistoryItem
 import com.example.translator.android.translate.presentation.components.TranslateTextField
 import com.example.translator.android.translate.presentation.components.gradientSurface
 import com.example.translator.core.presentation.UiLanguage
@@ -51,51 +52,6 @@ import com.example.translator.translate.domain.translate.TranslateError
 import com.example.translator.translate.presentation.TranslateEvent
 import com.example.translator.translate.presentation.TranslateState
 import com.example.translator.translate.presentation.UiHistoryItem
-
-@Composable
-fun TranslateHistoryItem(
-    item: UiHistoryItem,
-    onClick: () -> Unit,
-    modifier: Modifier
-) {
-    Column(
-        modifier = modifier
-            .shadow(elevation = 4.dp, shape = RoundedCornerShape(24.dp))
-            .clip(RoundedCornerShape(24.dp))
-            .gradientSurface()
-            .clickable(onClick = onClick)
-            .padding(16.dp)
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            SmallLanguageIcon(language = item.fromLanguage)
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(
-                text = item.fromText,
-                style = MaterialTheme.typography.bodyMedium,
-            )
-            Spacer(modifier = Modifier.width(16.dp))
-            SmallLanguageIcon(language = item.toLanguage)
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(
-                text = item.toText,
-                color = MaterialTheme.colorScheme.onSurface,
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Medium,
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1,
-                modifier = Modifier.weight(1f)
-            )
-            Icon(
-                imageVector = Icons.Default.Favorite,
-                contentDescription = stringResource(id = R.string.cd_add_to_favorite),
-                modifier = Modifier.size(24.dp)
-            )
-        }
-    }
-}
 
 @Composable
 fun TranslateScreen(
@@ -141,11 +97,11 @@ fun TranslateScreen(
             }
         },
         floatingActionButtonPosition = FabPosition.Center
-    ) { paddingValues ->
+    ) { innerPadding ->
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
+                .padding(innerPadding)
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
@@ -220,6 +176,7 @@ fun TranslateScreen(
                     TranslateHistoryItem(
                         item = item,
                         onClick = { onEvent(TranslateEvent.SelectHistoryItem(item)) },
+                        onSaveClick = { onEvent(TranslateEvent.SaveTranslation(item.id)) },
                         modifier = Modifier.fillMaxWidth()
                     )
                 }

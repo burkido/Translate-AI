@@ -40,7 +40,8 @@ class TranslateViewModel(
                             fromText = item.fromText,
                             toText = item.toText,
                             fromLanguage = UiLanguage.byCode(item.fromLanguageCode),
-                            toLanguage = UiLanguage.byCode(item.toLanguageCode)
+                            toLanguage = UiLanguage.byCode(item.toLanguageCode),
+                            isSaved = item.isSaved
                         )
                     }
                 }

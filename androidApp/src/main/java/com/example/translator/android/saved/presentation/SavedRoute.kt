@@ -1,6 +1,7 @@
 package com.example.translator.android.saved.presentation
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,6 +13,7 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,7 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.translator.android.R
-import com.example.translator.android.translate.presentation.TranslateHistoryItem
+import com.example.translator.android.translate.presentation.components.TranslateHistoryItem
 import com.example.translator.saved.presentation.SavedEvent
 import com.example.translator.saved.presentation.SavedState
 
@@ -29,23 +31,30 @@ fun SavedRoute(
     state: SavedState,
     onEvent: (SavedEvent) -> Unit
 ) {
-    SavedScreen(
-        state = state,
-        onEvent = onEvent
-    )
+    Scaffold(
+        topBar = { SavedTopBar(onEvent = onEvent,)
+        },
+    ) { paddingValues ->
+        SavedScreen(
+            innerPadding = paddingValues,
+            state = state,
+            onEvent = onEvent
+        )
+    }
 }
 
 @Composable
-fun SavedScreen(state: SavedState, onEvent: (SavedEvent) -> Unit) {
+fun SavedScreen(
+    innerPadding: PaddingValues,
+    state: SavedState,
+    onEvent: (SavedEvent) -> Unit,
+) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(innerPadding),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-
-        item { SavedTopBar(onEvent = onEvent) }
-
         items(
             count = state.savedTranslations.size,
             key = { index -> state.savedTranslations[index].id },
@@ -53,7 +62,9 @@ fun SavedScreen(state: SavedState, onEvent: (SavedEvent) -> Unit) {
                 val item = state.savedTranslations[index]
                 TranslateHistoryItem(
                     item = item,
-                    onClick = { onEvent(SavedEvent.SaveTranslation(item.id)) },
+                    onClick = { },
+                    isClickable = false,
+                    onSaveClick = { onEvent(SavedEvent.SaveTranslation(item.id)) },
                     modifier = Modifier.fillMaxWidth()
                 )
             }
