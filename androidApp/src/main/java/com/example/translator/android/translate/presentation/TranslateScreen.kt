@@ -14,10 +14,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -117,6 +119,11 @@ fun TranslateScreen(
     }
 
     Scaffold(
+        topBar = {
+            TranslateTopBar(
+                onEvent = onEvent,
+            )
+        },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = { onEvent(TranslateEvent.RecordAudio) },
@@ -198,7 +205,10 @@ fun TranslateScreen(
 
             item {
                 if (state.history.isNotEmpty()) {
-                    Text(text = stringResource(id = R.string.history), style = MaterialTheme.typography.bodyMedium)
+                    Text(
+                        text = stringResource(id = R.string.history),
+                        style = MaterialTheme.typography.bodyMedium
+                    )
                 }
             }
 
@@ -213,6 +223,30 @@ fun TranslateScreen(
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
+            )
+        }
+    }
+}
+
+@Composable
+fun TranslateTopBar(onEvent: (TranslateEvent) -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = stringResource(id = R.string.translate),
+            style = MaterialTheme.typography.titleMedium
+        )
+        Spacer(modifier = Modifier.weight(1f))
+        IconButton(onClick = { onEvent(TranslateEvent.OpenFromLanguageDropdown) }) {
+            Icon(
+                imageVector = Icons.Filled.Delete,
+                contentDescription = stringResource(id = R.string.delete_all),
+                modifier = Modifier.size(24.dp)
             )
         }
     }
@@ -291,5 +325,5 @@ fun TranslateScreenPreview() {
         ),
         onEvent = {}
     )
-    
+
 }

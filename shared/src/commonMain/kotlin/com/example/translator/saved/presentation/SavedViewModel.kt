@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class SavedViewModel(
     private val historyDataSource: HistoryDataSource,
-    private val coroutineScope: CoroutineScope?,
+    coroutineScope: CoroutineScope?,
 ) {
 
     private val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)
@@ -62,6 +62,12 @@ class SavedViewModel(
             is SavedEvent.DeleteTranslationById -> {
                 viewModelScope.launch {
                     historyDataSource.deleteHistoryItem(event.id)
+                }
+            }
+
+            is SavedEvent.SaveTranslation -> {
+                viewModelScope.launch {
+                    historyDataSource.saveHistory(event.id)
                 }
             }
         }
