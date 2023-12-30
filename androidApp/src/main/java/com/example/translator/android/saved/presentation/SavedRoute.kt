@@ -7,11 +7,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.example.translator.saved.presentation.SavedEvent
+import com.example.translator.saved.presentation.SavedState
 
 @Composable
-fun SavedRoute() {
+fun SavedRoute(
+    state: SavedState,
+    onEvent: (SavedEvent) -> Unit
+) {
 
-    // TODO: view model will be added here
     SavedScreen()
 }
 

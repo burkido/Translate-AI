@@ -15,4 +15,6 @@
     <string name="saved">Saved</string>
     <string name="tab_translate">Home</string>
     <string name="save">Save current translation</string>
+    <string name="history">History</string>
+    <string name="cd_add_to_favorite">Add history item to favorite</string>
 </resources>

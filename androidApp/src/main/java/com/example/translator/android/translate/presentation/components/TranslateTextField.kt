@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -54,7 +53,6 @@ fun TranslateTextField(
     onTextChange: (String) -> Unit,
     onCopyClick: (String) -> Unit,
     onCloseClick: () -> Unit,
-    onSaveClick: () -> Unit,
     onSpeakClick: () -> Unit,
     onTextFieldClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -89,7 +87,6 @@ fun TranslateTextField(
                     toLanguage = toLanguage,
                     onCopyClick = onCopyClick,
                     onCloseClick = onCloseClick,
-                    onSaveClick = onSaveClick,
                     onSpeakerClick = onSpeakClick,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -140,7 +137,6 @@ fun TranslatedTextField(
     toLanguage: UiLanguage,
     onCopyClick: (String) -> Unit,
     onCloseClick: () -> Unit,
-    onSaveClick: () -> Unit,
     onSpeakerClick: () -> Unit,
     modifier: Modifier
 ) {
@@ -179,13 +175,6 @@ fun TranslatedTextField(
         Row(
             modifier = Modifier.align(Alignment.End)
         ) {
-            IconButton(onClick = onSaveClick) {
-                Icon(
-                    imageVector = Icons.Filled.Favorite,
-                    contentDescription = stringResource(id = R.string.save),
-                    tint = LightBlue
-                )
-            }
             IconButton(onClick = { onCopyClick(toText) }) {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.ic_baseline_content_copy_24),
@@ -217,7 +206,6 @@ fun TranslateTextFieldPreview() {
         onTextChange = {},
         onCopyClick = {},
         onCloseClick = {},
-        onSaveClick = {},
         onSpeakClick = {},
         onTextFieldClick = {},
         modifier = Modifier

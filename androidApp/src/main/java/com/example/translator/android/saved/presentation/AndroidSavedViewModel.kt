@@ -20,6 +20,8 @@ class AndroidSavedViewModel @Inject constructor(
         )
     }
 
+    val uiState = viewModel.value.state
+
     fun onEvent(event: SavedEvent) {
         viewModel.value.onEvent(event)
     }
