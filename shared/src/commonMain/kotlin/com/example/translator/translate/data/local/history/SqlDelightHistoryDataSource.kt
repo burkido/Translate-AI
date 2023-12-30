@@ -66,6 +66,10 @@ class SqlDelightHistoryDataSource(
             .asCommonFlow()
     }
 
+    override suspend fun getSavedHistoryItem(id: Long): HistoryItem? {
+        return queries.getHistoryEntity(id = id).executeAsOneOrNull()?.toHistoryItem()
+    }
+
     override fun clearSavedHistories() {
         queries.clearSavedHistory()
     }

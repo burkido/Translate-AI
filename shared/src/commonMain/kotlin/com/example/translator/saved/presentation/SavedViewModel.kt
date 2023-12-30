@@ -34,7 +34,8 @@ class SavedViewModel(
                             fromText = item.fromText,
                             toText = item.toText,
                             fromLanguage = UiLanguage.byCode(item.fromLanguageCode),
-                            toLanguage = UiLanguage.byCode(item.toLanguageCode)
+                            toLanguage = UiLanguage.byCode(item.toLanguageCode),
+                            isSaved = item.isSaved
                         )
                     }
                 }
@@ -65,9 +66,16 @@ class SavedViewModel(
                 }
             }
 
-            is SavedEvent.SaveTranslation -> {
+            is SavedEvent.ToggleTranslationSaveStatus -> {
                 viewModelScope.launch {
-                    historyDataSource.saveHistory(event.id)
+                    val item = historyDataSource.getSavedHistoryItem(event.id)
+                    if (item != null) {
+                        if (item.isSaved) {
+                            historyDataSource.unSaveHistory(event.id)
+                        } else {
+                            historyDataSource.saveHistory(event.id)
+                        }
+                    }
                 }
             }
         }

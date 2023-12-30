@@ -13,7 +13,7 @@ sealed class TranslateEvent {
     object OpenFromLanguageDropdown : TranslateEvent()
     object OpenToLanguageDropdown : TranslateEvent()
     object CloseTranslation : TranslateEvent()
-    data class SaveTranslation(val id: Long) : TranslateEvent()
+    data class ToggleTranslationSaveStatus(val id: Long) : TranslateEvent()
     data class SelectHistoryItem(val item: UiHistoryItem) : TranslateEvent()
     object EditTranslation : TranslateEvent()
     object RecordAudio : TranslateEvent()

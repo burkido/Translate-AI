@@ -18,5 +18,7 @@ interface HistoryDataSource {
 
     fun getSavedHistories(): CommonFlow<List<HistoryItem>>
 
+    suspend fun getSavedHistoryItem(id: Long): HistoryItem?
+
     fun clearSavedHistories()
 }

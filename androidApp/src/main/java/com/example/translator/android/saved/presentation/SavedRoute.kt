@@ -1,5 +1,6 @@
 package com.example.translator.android.saved.presentation
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -32,7 +33,7 @@ fun SavedRoute(
     onEvent: (SavedEvent) -> Unit
 ) {
     Scaffold(
-        topBar = { SavedTopBar(onEvent = onEvent,)
+        topBar = { SavedTopBar(onEvent = onEvent)
         },
     ) { paddingValues ->
         SavedScreen(
@@ -49,6 +50,8 @@ fun SavedScreen(
     state: SavedState,
     onEvent: (SavedEvent) -> Unit,
 ) {
+    Log.d("save-test", "SavedScreen: ${state.savedTranslations}")
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -63,8 +66,7 @@ fun SavedScreen(
                 TranslateHistoryItem(
                     item = item,
                     onClick = { },
-                    isClickable = false,
-                    onSaveClick = { onEvent(SavedEvent.SaveTranslation(item.id)) },
+                    onSaveClick = { onEvent(SavedEvent.ToggleTranslationSaveStatus(item.id)) },
                     modifier = Modifier.fillMaxWidth()
                 )
             }

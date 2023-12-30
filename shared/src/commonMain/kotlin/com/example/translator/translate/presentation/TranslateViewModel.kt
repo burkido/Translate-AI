@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 class TranslateViewModel(
     private val translate: TranslateUseCase,
     private val historyDataSource: HistoryDataSource,
-    private val coroutineScope: CoroutineScope?
+    coroutineScope: CoroutineScope?
 ) {
 
     // TODO: Get dispatcher as a parameter. Think about it.
@@ -160,12 +160,18 @@ class TranslateViewModel(
             }
 
             TranslateEvent.Translate -> translate(state.value)
-            is TranslateEvent.SaveTranslation -> {
+            is TranslateEvent.ToggleTranslationSaveStatus -> {
                 viewModelScope.launch {
-                    historyDataSource.saveHistory(id = event.id)
+                    val item = historyDataSource.getSavedHistoryItem(event.id)
+                    if (item != null) {
+                        if (item.isSaved) {
+                            historyDataSource.unSaveHistory(event.id)
+                        } else {
+                            historyDataSource.saveHistory(event.id)
+                        }
+                    }
                 }
             }
-
             else -> Unit
         }
     }

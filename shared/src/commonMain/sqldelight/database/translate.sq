@@ -41,6 +41,11 @@ FROM historyEntity
 WHERE isSaved = 1
 ORDER BY timestamp DESC;
 
+getHistoryEntity:
+SELECT *
+FROM historyEntity
+WHERE id = ?;
+
 saveHistoryEntity:
 UPDATE historyEntity
 SET isSaved = 1
