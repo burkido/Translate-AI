@@ -133,6 +133,17 @@ class TranslateViewModel(
                 ) }
             }
             TranslateEvent.Translate -> translate(state.value)
+            TranslateEvent.SaveTranslation -> {
+                val state = state.value
+                viewModelScope.launch {
+//                    historyDataSource.saveTranslation(
+//                        fromText = state.fromText,
+//                        toText = state.toText ?: "",
+//                        fromLanguageCode = state.fromLanguage.language,
+//                        toLanguageCode = state.toLanguage.language
+//                    )
+                }
+            }
             else -> Unit
         }
     }

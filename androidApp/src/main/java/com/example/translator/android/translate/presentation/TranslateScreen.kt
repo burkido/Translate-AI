@@ -181,6 +181,7 @@ fun TranslateScreen(
                     },
                     onCloseClick = { onEvent(TranslateEvent.CloseTranslation) },
                     onSpeakClick = { },
+                    onSaveClick = { onEvent(TranslateEvent.SaveTranslation) },
                     onTextFieldClick = { onEvent(TranslateEvent.EditTranslation) },
                 )
             }

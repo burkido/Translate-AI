@@ -113,9 +113,7 @@ fun TranslateRoot(
         startDestination = translate_route,
         modifier = modifier
     ) {
-        translateGraph(
-            navController = navController,
-        )
+        translateGraph(navController = navController,)
         savedGraph()
         voiceToTextGraph(navController = navController)
     }

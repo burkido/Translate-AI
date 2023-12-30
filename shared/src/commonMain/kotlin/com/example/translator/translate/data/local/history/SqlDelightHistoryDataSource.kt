@@ -37,4 +37,12 @@ class SqlDelightHistoryDataSource(
             timestamp = Clock.System.now().toEpochMilliseconds()
         )
     }
+
+    override suspend fun clearHistory() {
+        //queries.clearHistory()
+    }
+
+    override suspend fun saveTranslation(item: HistoryItem) {
+        TODO("Not yet implemented")
+    }
 }

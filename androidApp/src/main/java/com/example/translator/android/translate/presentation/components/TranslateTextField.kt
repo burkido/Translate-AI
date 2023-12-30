@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -35,9 +36,11 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.translator.android.R
 import com.example.translator.android.core.theme.LightBlue
+import com.example.translator.core.domain.language.Language
 import com.example.translator.core.presentation.UiLanguage
 
 @Composable
@@ -51,6 +54,7 @@ fun TranslateTextField(
     onTextChange: (String) -> Unit,
     onCopyClick: (String) -> Unit,
     onCloseClick: () -> Unit,
+    onSaveClick: () -> Unit,
     onSpeakClick: () -> Unit,
     onTextFieldClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -85,6 +89,7 @@ fun TranslateTextField(
                     toLanguage = toLanguage,
                     onCopyClick = onCopyClick,
                     onCloseClick = onCloseClick,
+                    onSaveClick = onSaveClick,
                     onSpeakerClick = onSpeakClick,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -135,6 +140,7 @@ fun TranslatedTextField(
     toLanguage: UiLanguage,
     onCopyClick: (String) -> Unit,
     onCloseClick: () -> Unit,
+    onSaveClick: () -> Unit,
     onSpeakerClick: () -> Unit,
     modifier: Modifier
 ) {
@@ -173,6 +179,13 @@ fun TranslatedTextField(
         Row(
             modifier = Modifier.align(Alignment.End)
         ) {
+            IconButton(onClick = onSaveClick) {
+                Icon(
+                    imageVector = Icons.Filled.Favorite,
+                    contentDescription = stringResource(id = R.string.save),
+                    tint = LightBlue
+                )
+            }
             IconButton(onClick = { onCopyClick(toText) }) {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.ic_baseline_content_copy_24),
@@ -189,4 +202,26 @@ fun TranslatedTextField(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun TranslateTextFieldPreview() {
+    TranslateTextField(
+        fromText = "Hello",
+        toText = "Привет",
+        isTranslating = false,
+        fromLanguage = UiLanguage(com.example.translator.R.drawable.turkish, Language.TURKISH),
+        toLanguage = UiLanguage(com.example.translator.R.drawable.turkish, Language.TURKISH),
+        onTranslateClick = {},
+        onTextChange = {},
+        onCopyClick = {},
+        onCloseClick = {},
+        onSaveClick = {},
+        onSpeakClick = {},
+        onTextFieldClick = {},
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    )
 }
