@@ -18,4 +18,7 @@
     <string name="history">Geçmiş</string>
     <string name="cd_add_to_favorite">Geçmiş öğesini favorilere ekle</string>
     <string name="delete_all">Tüm Kaydedilmiş Geçmiş Öğelerini Sil</string>
+    <string name="are_you_sure">Are you sure to delete all saved translations?</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
 </resources>

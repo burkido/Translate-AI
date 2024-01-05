@@ -18,4 +18,7 @@
     <string name="history">Cronologia</string>
     <string name="cd_add_to_favorite">Aggiungi elemento della cronologia ai preferiti</string>
     <string name="delete_all">Elimina tutti gli elementi salvati nella cronologia</string>
+    <string name="are_you_sure">Are you sure to delete all saved translations?</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
 </resources>

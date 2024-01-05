@@ -18,4 +18,7 @@
     <string name="history">इतिहास</string>
     <string name="cd_add_to_favorite">इतिहास आइटम को पसंदीदा में जोड़ें</string>
     <string name="delete_all">सभी सहेजे गए इतिहास आइटम्स को हटाएं</string>
+    <string name="are_you_sure">Are you sure to delete all saved translations?</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
 </resources>

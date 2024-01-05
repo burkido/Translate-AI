@@ -18,4 +18,7 @@
     <string name="history">Historique</string>
     <string name="cd_add_to_favorite">Ajouter un élément d\'historique aux favoris</string>
     <string name="delete_all">Supprimer tous les éléments d\'historique enregistrés</string>
+    <string name="are_you_sure">Are you sure to delete all saved translations?</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
 </resources>

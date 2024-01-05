@@ -18,4 +18,7 @@
     <string name="history">التاريخ</string>
     <string name="cd_add_to_favorite">إضافة عنصر التاريخ إلى المفضلة</string>
     <string name="delete_all">حذف جميع عناصر التاريخ المحفوظة</string>
+    <string name="are_you_sure">Are you sure to delete all saved translations?</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
 </resources>
