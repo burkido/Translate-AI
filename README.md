@@ -4,9 +4,7 @@
 
 Translate AI is a Kotlin Multiplatform Mobile (KMM) project that embraces Clean Architecture principles and follows the Model-View-Intent (MVI) pattern. This project structure is designed to provide a scalable and maintainable foundation for Android development and IOS (IOS part is missing. Must be continued). Also, Material 3 theming is applied to the Android side
 
-<video width="320" height="600" controls>
-  <source src="/Users/burak/Developer/AndroidStudioProjects/Translator/demonstration/TranslateAI.mp4" type="video/mp4">
-</video>
+https://github.com/burkido/Translate-AI/assets/74553201/9598f5ef-866b-4ccf-8038-635a074038c4
 
 The overall project structure for shared module is described below, featuring a sample from the shared module. For a better understanding, please refer to the entire project. Following this project https://github.com/philipplackner/Translator_KMM (You can follow part by part from branches.), I integrated Material 3 theming, a bottom bar, and the saved feature.
 
