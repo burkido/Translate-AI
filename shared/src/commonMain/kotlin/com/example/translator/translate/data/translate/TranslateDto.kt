@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class TranslateDto(
-    @SerialName("q") val textToTranslate: String,
-    @SerialName("source") val sourceLanguageCode: String,
-    @SerialName("target") val targetLanguageCode: String,
+    @SerialName("text") val textToTranslate: String,
+    @SerialName("source_lang") val sourceLanguageCode: String,
+    @SerialName("target_lang") val targetLanguageCode: String,
 )

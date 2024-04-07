@@ -35,4 +35,11 @@ google-services.json
 # Android Profiling
 *.hprof
 
+*.plist
+*.xcuserstate
+gradlew.bat
+
+*.xcbkptlist
+*.xcscheme
+
 shared/src/commonMain/kotlin/com/example/translator/util/NetworkConstants.kt
