@@ -3,7 +3,8 @@ plugins {
     kotlin("android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
-    kotlin("plugin.serialization") version Deps.kotlinVersion
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
+    //kotlin("plugin.serialization") version Deps.kotlinVersion
 }
 
 android {
@@ -16,6 +17,27 @@ android {
         versionCode = 1
         versionName = "1.0"
     }
+    signingConfigs {
+        create("release") {
+            storeFile = file("key/translate-ai-keystore.jks")
+            storePassword = "bkapps-translate-ai-key"
+            keyAlias = "bkapps"
+            keyPassword = "bkapps-translate-ai-key"
+        }
+    }
+    buildTypes {
+        release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            isDebuggable = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            signingConfig = signingConfigs.getByName("release")
+
+        }
+    }
     buildFeatures {
         compose = true
     }
@@ -25,11 +47,6 @@ android {
     packagingOptions {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
         }
     }
 }
