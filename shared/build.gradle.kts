@@ -76,7 +76,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.example.translator"
+    namespace = "com.bapps.translator"
     compileSdk = 33
     defaultConfig {
         minSdk = 24
@@ -86,7 +86,7 @@ android {
 
 sqldelight {
     database("TranslateDatabase") {
-        packageName = "com.example.translator.database"
+        packageName = "com.bapps.translator.database"
         sourceFolders = listOf("sqldelight")
     }
 }

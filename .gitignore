@@ -42,4 +42,4 @@ gradlew.bat
 *.xcbkptlist
 *.xcscheme
 
-shared/src/commonMain/kotlin/com/example/translator/util/NetworkConstants.kt
+shared/src/commonMain/kotlin/com/bapps/translator/util/NetworkConstants.kt

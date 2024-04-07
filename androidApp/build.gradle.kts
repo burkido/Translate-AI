@@ -7,10 +7,10 @@ plugins {
 }
 
 android {
-    namespace = "com.example.translator.android"
+    namespace = "com.bapps.translator.android"
     compileSdk = 34
     defaultConfig {
-        applicationId = "com.example.translator.android"
+        applicationId = "com.bapps.translator.android"
         minSdk = 24
         targetSdk = 33
         versionCode = 1
